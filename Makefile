@@ -4,6 +4,8 @@ SUBLEVEL = 14
 EXTRAVERSION =
 NAME = Shuffling Zombie Juror
 
+PLATFORM_VERSION = 7.1.1
+
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
 # More info can be located in ./README
@@ -413,7 +415,9 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
 		   -Werror \
-		   -std=gnu89
+		   -std=gnu89 \
+		   -Wno-logical-not-parentheses -Wno-switch-bool \
+		   -mtune=cortex-a72.cortex-a53
 
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
