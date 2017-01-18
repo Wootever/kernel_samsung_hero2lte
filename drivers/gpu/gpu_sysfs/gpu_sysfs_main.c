@@ -26,7 +26,7 @@ DEVICE_ATTR(fps, 0644, fps_show, fps_write);
 /* The below function will generate sysfs during initialization stage. */
 int gpu_sysfs_create_sysfs_files(struct device *dev)
 {
-	pr_info("GPU_SYSFS ----------- %s -- %d", __FUNCTION__, __LINE__);
+	pr_info("GPU_SYSFS ----------- %s -- %d\n", __FUNCTION__, __LINE__);
 	
 	if (device_create_file(dev, &dev_attr_gpu_min_clock)) 
 	{
@@ -112,7 +112,7 @@ int gpu_sysfs_create_sysfs_files(struct device *dev)
 		goto out;
 	}
 	
-	pr_info("GPU_SYSFS ----------- %s -- %d", __FUNCTION__, __LINE__);
+	pr_info("GPU_SYSFS ----------- %s -- %d\n", __FUNCTION__, __LINE__);
 	return 0;
 
 out:
@@ -121,7 +121,7 @@ out:
 
 void gpu_sysfs_remove_sysfs_files(struct device *dev)
 {
-	pr_info("GPU_SYSFS ----------- %s -- %d", __FUNCTION__, __LINE__);
+	pr_info("GPU_SYSFS ----------- %s -- %d\n", __FUNCTION__, __LINE__);
 	
 	device_remove_file(dev, &dev_attr_gpu_min_clock);
 	device_remove_file(dev, &dev_attr_gpu_max_clock);
@@ -141,7 +141,7 @@ void gpu_sysfs_remove_sysfs_files(struct device *dev)
 
 sruk_bool gpu_sysfs_device_init(sruk_device * const kbdev)
 {
-	pr_info("GPU_SYSFS ----------- %s -- %d", __FUNCTION__, __LINE__);
+	pr_info("GPU_SYSFS ----------- %s -- %d\n", __FUNCTION__, __LINE__);
 
 	if (gpu_sysfs_create_sysfs_files(kbdev->osdev.dev))
 		return SRUK_FALSE;
@@ -155,7 +155,7 @@ static int gpu_sysfs_probe(struct platform_device *pdev)
 	struct sruk_os_device *osdev;
 	int err;
 
-	pr_info("GPU_SYSFS ----------- %s -- %d", __FUNCTION__, __LINE__);
+	pr_info("GPU_SYSFS ----------- %s -- %d\n", __FUNCTION__, __LINE__);
 
 	kbdev = kzalloc(sizeof(sruk_device), GFP_KERNEL);
 	if (!kbdev) 
@@ -175,7 +175,7 @@ static int gpu_sysfs_probe(struct platform_device *pdev)
 		goto out_reg_unmap;
 	}
 
-	pr_info("GPU_SYSFS ----------- %s -- %d", __FUNCTION__, __LINE__);
+	pr_info("GPU_SYSFS ----------- %s -- %d\n", __FUNCTION__, __LINE__);
 	osdev = NULL;
 	kzfree(kbdev);
 	return 0;
@@ -195,7 +195,7 @@ static int gpu_sysfs_remove(struct platform_device *pdev)
 {
 	struct sruk_device *kbdev = (struct sruk_device *)(&pdev->dev);
 
-	pr_info("GPU_SYSFS ----------- %s -- %d", __FUNCTION__, __LINE__);
+	pr_info("GPU_SYSFS ----------- %s -- %d\n", __FUNCTION__, __LINE__);
 	
 	if (!kbdev)
 		return -ENODEV;
@@ -226,12 +226,12 @@ static int __init gpu_sysfs_init(void)
 {
 	int ret;
 	
-	pr_info("GPU_SYSFS ----------- %s -- %d", __FUNCTION__, __LINE__);
+	pr_info("GPU_SYSFS ----------- %s -- %d\n", __FUNCTION__, __LINE__);
 	
 	gpu_sysfs_pdev = platform_device_alloc(GPU_SYSFS_MODULE_NAME, -1);
 	if (!gpu_sysfs_pdev) 
 	{
-		pr_info("GPU_SYSFS ----------- %s -- %d", __FUNCTION__, __LINE__);
+		pr_info("GPU_SYSFS ----------- %s -- %d\n", __FUNCTION__, __LINE__);
 		pr_err("Failed to allocate dummy regulator device\n");
 		return 0;
 	}
@@ -252,14 +252,14 @@ static int __init gpu_sysfs_init(void)
 		platform_device_unregister(gpu_sysfs_pdev);
 	}
 
-	pr_info("GPU_SYSFS ----------- %s -- %d", __FUNCTION__, __LINE__);
+	pr_info("GPU_SYSFS ----------- %s -- %d\n", __FUNCTION__, __LINE__);
 
 	return 0;
 }
 
 static void __exit gpu_sysfs_exit(void)
 {
-	pr_info( "GPU_SYSFS: Unified Sysfs for GPU: Exiting" );
+	pr_info( "GPU_SYSFS: Unified Sysfs for GPU: Exiting\n" );
 	platform_driver_unregister(&gpu_sysfs_platform_driver);
 }
 
