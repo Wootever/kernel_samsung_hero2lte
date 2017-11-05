@@ -1683,7 +1683,9 @@ static int smart_init_dimming(struct dsim_device *dsim, u8 * mtp, u8 * hbm)
 	diminfo = (void *)dimming_info_smart;
 	panel->smart_dim_data = (void *)dimming;
 	panel->smart_dim_info = (void *)diminfo;
+#ifdef CONFIG_PANEL_SMART_DIMMING_ENABLE
 	panel->smart_on = 1;
+#endif
 
 	for (j = 0; j < CI_MAX; j++) {
 		temp = ((mtp[pos] & 0x01) ? -1 : 1) * mtp[pos+1];
